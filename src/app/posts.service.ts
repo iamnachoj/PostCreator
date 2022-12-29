@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Post} from './post.model';
 import {map} from 'rxjs/operators';
-import {NgForm} from "@angular/forms";
+import {NgForm} from '@angular/forms';
 
 
 @Injectable({
@@ -28,10 +28,11 @@ export class PostsService {
 
   createPost(postForm: NgForm) {
     return this.http.post<{ name: string }>(
-      'https://cocinitasapp-default-rtdb.europe-west1.firebasedatabase.app/posts.json', postForm.value);
+      'https://cocinitasapp-default-rtdb.europe-west1.firebasedatabase.app/posts.json',
+      {title: postForm.value.title, content: postForm.value.content, date: new Date()});
   }
 
   deletePosts() {
-    return this.http.delete('https://cocinitasapp-default-rtdb.europe-west1.firebasedatabase.app/posts.json')
+    return this.http.delete('https://cocinitasapp-default-rtdb.europe-west1.firebasedatabase.app/posts.json');
   }
 }
