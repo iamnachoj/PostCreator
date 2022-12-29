@@ -1,0 +1,22 @@
+.container {
+  margin-top: 30px;
+}
+
+.row {
+  margin: 20px 0;
+}
+.postDiv{
+  padding: 0 10px;
+  margin:5px 0 10px;
+  border: 1px black solid;
+}
+.load-logo {
+  position: relative;
+  left: 10px;
+  top: 7px;
+}
+.fetch-logo {
+  position: relative;
+  left: 50%;
+  top: 7px;
+}

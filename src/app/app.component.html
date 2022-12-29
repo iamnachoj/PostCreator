@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-6 mx-auto">
+      <form #postForm="ngForm" (ngSubmit)="onCreatePost(postForm)">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            required
+            ngModel
+            name="title"
+          />
+        </div>
+        <div class="form-group">
+          <label for="content">Content</label>
+          <textarea
+            class="form-control"
+            id="content"
+            required
+            ngModel
+            name="content"
+          ></textarea>
+        </div>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!postForm.valid"
+        >
+          Send Post
+        </button>
+        <div *ngIf="isLoading" class="spinner-border load-logo" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <span style="margin-left: 5px; color: red " *ngIf="creatingError">{{creatingError}}</span>
+      </form>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-12 col-lg-6 mx-auto">
+      <button class="btn btn-primary" (click)="onFetchPosts()">
+        Fetch Posts
+      </button>
+      |
+      <button
+        class="btn btn-danger"
+        [disabled]="loadedPosts.length < 1"
+        (click)="onClearPosts()"
+      >
+        Clear Posts
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-6 mx-auto">
+      <div *ngIf="isFetching && !fetchingError" class="spinner-border fetch-logo" role="status">
+        <span class="sr-only">Fetching new posts...</span>
+      </div>
+      <span style="margin-left: 5px; color: red " *ngIf="fetchingError">{{fetchingError}}</span>
+    </div>
+  </div>
+  <div class="row" *ngIf="!isFetching">
+    <div class="col-12 col-lg-6 mx-auto" *ngIf="loadedPosts.length < 1">
+      <p>No posts available!</p>
+    </div>
+    <div class="col-12 col-lg-6 mx-auto" *ngIf="loadedPosts.length >= 1">
+      <div class="postDiv" *ngFor="let post of loadedPosts;">
+        <h3>{{post.title}}</h3>
+        <hr>
+        <p>{{post.content}}</p>
+      </div>
+    </div>
+  </div>
+</div>
