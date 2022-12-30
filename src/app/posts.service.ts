@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Post} from './post.model';
 import {map} from 'rxjs/operators';
 import {NgForm} from '@angular/forms';
@@ -29,7 +29,12 @@ export class PostsService {
   createPost(postForm: NgForm) {
     return this.http.post<{ name: string }>(
       'https://cocinitasapp-default-rtdb.europe-west1.firebasedatabase.app/posts.json',
-      {title: postForm.value.title, content: postForm.value.content, date: new Date()});
+      {title: postForm.value.title, content: postForm.value.content, date: new Date()},
+      {
+        headers: new HttpHeaders({
+          CustomHeader: 'Hello'
+        })
+      });
   }
 
   deletePosts() {
