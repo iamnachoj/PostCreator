@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Post} from './post.model';
 import {map} from 'rxjs/operators';
 import {NgForm} from '@angular/forms';
@@ -33,8 +33,11 @@ export class PostsService {
       {
         headers: new HttpHeaders({
           CustomHeader: 'Hello'
-        })
-      });
+        }),
+        params: new HttpParams().set('print', 'pretty'),
+        observe: 'body'
+      }
+      );
   }
 
   deletePosts() {
